@@ -25,7 +25,6 @@ analysis_option = st.sidebar.selectbox(
         "Subscribed vs Non-Subscribed Purchases",
         "Popular Payment Methods",
         "Promo Code Spending",
-        "Frequency of Purchases by Age Group",
         "Correlation: Size and Purchase Amount",
         "Shipping Type by Category",
         "Effect of Discounts",
@@ -108,14 +107,6 @@ elif analysis_option == "Promo Code Spending":
     promo_spending = shop.groupby('Promo Code Used')['Purchase Amount (USD)'].sum().reset_index()
     fig = px.bar(promo_spending, x='Promo Code Used', y='Purchase Amount (USD)',
                  title="Total Spending with and without Promo Codes")
-    st.plotly_chart(fig)
-
-# Frequency of Purchases by Age Group
-elif analysis_option == "Frequency of Purchases by Age Group":
-    st.title("Frequency of Purchases by Age Group")
-    age_group_freq = shop.groupby(['Age_category', 'Frequency of Purchases']).size().reset_index(name='Count')
-    fig = px.bar(age_group_freq, x='Age_category', y='Count', color='Frequency of Purchases',
-                 title="Purchase Frequency Across Age Groups")
     st.plotly_chart(fig)
 
 # Correlation: Size and Purchase Amount
