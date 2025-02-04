@@ -1,3 +1,10 @@
+Try the live application here: 
+https://shopping-analysis-4ht.streamlit.app/ 
+This is for python on streamlit.
+https://sanjanaahello.shinyapps.io/Shopshere/ 
+This is for interactive dashboard R language on shiny
+
+
 This repository contains a project aimed at analyzing shopping trends using Python and data visualization tools. The project provides insights into customer behavior, product popularity, and seasonal shopping trends based on historical data.
 
 Project Versions
