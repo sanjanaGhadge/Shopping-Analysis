@@ -144,14 +144,14 @@ ui <- dashboardPage(
   $(document).ready(function() {
     // Auto-play welcome message after 1 second
     setTimeout(function() {
-      var welcomeMessage = 'Welcome to ShopSphere. A 360-degree Analysis project. This project analyzes shopping trends to provide insights into consumer behavior and preferences. Designed and created by Sanjana, Amisha, Sneha, Laxita, and Sejal.';
+      var welcomeMessage = 'Welcome to ShopSphere. A 360-degree Analysis project. This project analyzes shopping trends to provide insights into consumer behavior and preferences. Designed and created by Sanjana.';
       var langCode = 'en-US';
       ensureVoicesLoaded(() => loadVoicesAndSpeak(welcomeMessage, langCode));
     }, 1000);
 
     // Play Welcome Audio
     $('#play_welcome_audio').click(function() {
-      var welcomeMessage = 'Welcome to ShopSphere. A 360-degree Analysis project. This project analyzes shopping trends to provide insights into consumer behavior and preferences. Designed and created by Sanjana, Amisha, Sneha, Laxita, and Sejal.';
+      var welcomeMessage = 'Welcome to ShopSphere. A 360-degree Analysis project. This project analyzes shopping trends to provide insights into consumer behavior and preferences. Designed and created by Sanjana.';
       var langCode = 'en-US';
       ensureVoicesLoaded(() => loadVoicesAndSpeak(welcomeMessage, langCode));
     });
@@ -187,12 +187,8 @@ ui <- dashboardPage(
       stopAudio();
     });
   });
-"))
-      
-      
+"))     
 ),
-    
-    
     
     tabItems(
       tabItem(tabName = "welcome",
@@ -217,7 +213,7 @@ ui <- dashboardPage(
                   tags$p("Designed and created by:", 
                          style = "font-size: clamp(18px, 5vw, 22px); color: #F7DC6F; font-weight: bold; margin-bottom: 10px;"),
                   
-                  tags$p("Sanjana, Amisha, Sneha, Laxita, and Sejal", 
+                  tags$p("Sanjana", 
                          style = "font-size: clamp(20px, 5vw, 24px); font-weight: bold; color: #F7DC6F; margin-bottom: 20px;"),
                   
                   # Buttons Section (Aligned Center)
@@ -476,7 +472,7 @@ ui <- dashboardPage(
         <b>Marketing Impact</b>: Evaluate ad campaigns, customer engagement, and conversion rates.<br>
         <b>Inventory Management</b>: Optimize stock levels and forecast future demand.<br><br>
         Built using R, Shiny, Plotly, and shinydashboard, ShopSphere delivers a dynamic and interactive experience, allowing users to explore data in an intuitive way.<br><br>
-        <i>Designed by: Sanjana, Amisha, Sneha, Laxita, and Sejal.<i>"
+        <i>Designed by: Sanjana.<i>"
                   )),
                   
                   # Action buttons
