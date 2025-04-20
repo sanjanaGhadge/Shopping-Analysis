@@ -377,7 +377,25 @@ ui <- dashboardPage(
               <b>Popular Colors:</b> Olive, Yellow, and Silver are preferred. Highlighting these in product recommendations aligns with customer preferences.
             ")),
                   actionButton("play_conclusion_audio", "Read Conclusion"),
-                  actionButton("stop_audio", "Stop Audio")  # Added "Stop Audio" button
+                  actionButton("stop_audio", "Stop Audio"),  # Added "Stop Audio" button
+                  br(), br(),
+                  p("Thank you for exploring the ShopSphere dashboard! Below you can download the detailed report as a PDF."),
+                  h3("Download the full Report"),
+                  downloadButton("download_pdf", "Download Report (PDF)", class = "btn-primary"),
+                  tags$style(HTML("
+        #download_report {
+          color: white;
+          background-color: #007bff;
+          border-color: #007bff;
+          font-size: 16px;
+          padding: 10px 20px;
+          border-radius: 8px;
+        }
+        #download_report:hover {
+          background-color: #0056b3;
+          border-color: #0056b3;
+        }
+      "))
                 )
               )
       ),
@@ -476,7 +494,7 @@ ui <- dashboardPage(
         <b>Marketing Impact</b>: Evaluate ad campaigns, customer engagement, and conversion rates.<br>
         <b>Inventory Management</b>: Optimize stock levels and forecast future demand.<br><br>
         Built using R, Shiny, Plotly, and shinydashboard, ShopSphere delivers a dynamic and interactive experience, allowing users to explore data in an intuitive way.<br><br>
-        <i>Designed by: Sanjana.<i>"
+        <i>Designed by: Sanjana<i>"
                   )),
                   
                   # Action buttons
@@ -507,7 +525,7 @@ server <- function(input, output, session) {
       if ("Age" %in% colnames(shop)) {
         shop$Age_category <- cut(
           shop$Age,
-          breaks = c(0, 15, 18, 30, 50, 70),
+          breaks = c(7, 15, 18, 30, 50, 70),
           labels = c('Child', 'Teen', 'Young Adults', 'Middle-Aged Adults', 'Old'),
           include.lowest = TRUE
         )
@@ -1070,21 +1088,28 @@ server <- function(input, output, session) {
   output$analysis_plot_customer <- renderPlotly({
     req(input$analysis_option_customer)  # Ensure an option is selected
     
-    # Age Distribution (Histogram)
-    if (input$analysis_option_customer == "Age Distribution") {
+    # Age Distribution
+    if (input$analysis_option == "Age Distribution") {
       if ("Age" %in% colnames(shop)) {
+        shop$Age_category <- cut(
+          shop$Age,
+          breaks = c(7, 15, 18, 30, 50, 70),
+          labels = c('Child', 'Teen', 'Young Adults', 'Middle-Aged Adults', 'Old'),
+          include.lowest = TRUE
+        )
         fig <- plot_ly(
           data = shop,
-          x = ~Age,
-          type = 'histogram'
+          x = ~Age_category,
+          type = "histogram",
+          marker = list(color = 'steelblue')
         ) %>%
           layout(
-            title = "Age Distribution of Customers",
-            xaxis = list(title = "Age"),
-            yaxis = list(title = "Count")
+            title = "Age Distribution of Shoppers",
+            xaxis = list(title = "Age Category"),
+            yaxis = list(title = "Number of Shoppers")
           )
-        return(fig)
       }
+      return(fig)
     }
     
     # Purchases by Gender (Bar Chart)
@@ -1229,6 +1254,16 @@ server <- function(input, output, session) {
   output$data_table <- renderDT({
     datatable(shop, options = list(pageLength = 10, scrollX = TRUE))
   })
+  
+  output$download_pdf <- downloadHandler(
+    filename = function() {
+      "BDA report.pdf"
+    },
+    content = function(file) {
+      file.copy("BDA report.pdf", file)
+    },
+    contentType = "application/pdf"
+  )
 }
 
 # Run the application
