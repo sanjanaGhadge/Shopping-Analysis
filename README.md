@@ -1,7 +1,7 @@
 Try the live application here: 
 https://shopping-analysis-4ht.streamlit.app/ 
 This is for python on streamlit.
-https://sanjanaahello.shinyapps.io/Shopshere/ 
+https://sanjanaahello.shinyapps.io/Analysis/
 This is for interactive dashboard R language on shiny
 
 
